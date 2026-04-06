@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SmartGuard - Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f0f0f0; }
+        .container { max-width: 900px; margin: 0 auto; }
+        header { background: #333; color: white; padding: 20px; border-radius: 5px; margin-bottom: 20px; }
+        .card { background: white; padding: 20px; border-radius: 5px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        nav { margin: 20px 0; }
+        nav a { margin-right: 15px; color: #0066cc; text-decoration: none; }
+        nav a:hover { text-decoration: underline; }
+        .stat-box { display: inline-block; padding: 15px 25px; margin: 5px; background: #e8f4ff; border-radius: 5px; }
+        .stat-number { font-size: 24px; font-weight: bold; color: #0066cc; }
+        .stat-label { font-size: 12px; color: #666; }
+        ul { line-height: 1.8; }
+        a { color: #0066cc; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SmartGuard Energy Monitoring</h1>
+        </header>
+        
+        <nav>
+            <a href="/">Dashboard</a>
+            <a href="/buildings/">Buildings</a>
+            <a href="/anomalies/">Anomalies</a>
+            <a href="/admin/">Admin</a>
+        </nav>
+
+        <div class="card">
+            <h2>Overview</h2>
+            <div class="stat-box">
+                <div class="stat-number">{{ buildings }}</div>
+                <div class="stat-label">Buildings</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">{{ sensors }}</div>
+                <div class="stat-label">Active Sensors</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">{{ anomalies }}</div>
+                <div class="stat-label">Active Anomalies</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">{{ alerts }}</div>
+                <div class="stat-label">Active Alerts</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Quick Links</h2>
+            <ul>
+                <li><a href="/buildings/">View all buildings</a></li>
+                <li><a href="/anomalies/">View all anomalies</a></li>
+                <li><a href="/admin/">Admin panel</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
