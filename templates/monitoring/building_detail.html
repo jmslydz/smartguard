@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ building.name }} - SmartGuard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; }
+        header { background: #2c3e50; color: white; padding: 20px; }
+        nav { background: #34495e; padding: 10px 20px; }
+        nav a { color: white; text-decoration: none; margin-right: 20px; }
+        .container { max-width: 1200px; margin: 20px auto; padding: 20px; }
+        .card { background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #34495e; color: white; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{{ building.name }}</h1>
+    </header>
+    <nav>
+        <a href="/">Dashboard</a>
+        <a href="/buildings/">Buildings</a>
+        <a href="/anomalies/">Anomalies</a>
+    </nav>
+    <div class="container">
+        <div class="card">
+            <h2>Building Info</h2>
+            <p><strong>Type:</strong> {{ building.building_type }}</p>
+            <p><strong>Address:</strong> {{ building.address }}</p>
+        </div>
+
+        <div class="card">
+            <h2>Sensors ({{ sensors|length }})</h2>
+            {% if sensors %}
+            <table>
+                <tr>
+                    <th>Serial Number</th>
+                    <th>Location</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                </tr>
+                {% for sensor in sensors %}
+                <tr>
+                    <td>{{ sensor.serial_number }}</td>
+                    <td>{{ sensor.location }}</td>
+                    <td>{{ sensor.sensor_type }}</td>
+                    <td>{{ sensor.is_active|yesno:"Active,Inactive" }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p>No sensors found.</p>
+            {% endif %}
+        </div>
+
+        <div class="card">
+            <h2>Active Alerts ({{ alerts|length }})</h2>
+            {% if alerts %}
+            <table>
+                <tr>
+                    <th>Message</th>
+                    <th>Sent</th>
+                    <th>Action</th>
+                </tr>
+                {% for alert in alerts %}
+                <tr>
+                    <td>{{ alert.alert_message }}</td>
+                    <td>{{ alert.sent_at }}</td>
+                    <td><a href="/alert/{{ alert.id }}/acknowledge/">Acknowledge</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p>No active alerts.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
