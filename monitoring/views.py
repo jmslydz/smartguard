@@ -7,7 +7,7 @@ def home(request):
     sensors = Sensor.objects.filter(is_active=True)
     anomalies = Anomaly.objects.filter(resolved=False)
     alerts = Alert.objects.filter(is_acknowledged=False)
-    return render(request, 'home.html', {
+    return render(request, 'monitoring/home.html', {
         'buildings': buildings,
         'sensors': sensors,
         'anomalies': anomalies,
@@ -15,20 +15,20 @@ def home(request):
     })
 
 def buildings(request):
-    return render(request, 'buildings.html', {'buildings': Building.objects.all()})
+    return render(request, 'monitoring/buildings.html', {'buildings': Building.objects.all()})
 
 def building_detail(request, building_id):
     building = Building.objects.get(id=building_id)
     sensors = Sensor.objects.filter(building=building)
     alerts = Alert.objects.filter(building=building, is_acknowledged=False)
-    return render(request, 'building_detail.html', {
+    return render(request, 'monitoring/building_detail.html', {
         'building': building,
         'sensors': sensors,
         'alerts': alerts
     })
 
 def anomalies(request):
-    return render(request, 'anomalies.html', {'anomalies': Anomaly.objects.all()})
+    return render(request, 'monitoring/anomalies.html', {'anomalies': Anomaly.objects.all()})
 
 def acknowledge_alert(request, alert_id):
     alert = Alert.objects.get(id=alert_id)
